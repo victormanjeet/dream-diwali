@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="hi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diwali Special 🪔</title>
+<style>
+:root{color-scheme:dark;--bg:#12060a;--fg:#fff4dc;--gold:#ffb703;--red:#e63946;--card:#2a0f18;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;-webkit-tap-highlight-color:transparent}
+body.lit{background:radial-gradient(circle at 50% 20%,#5a1a0a,var(--bg) 70%)}
+.screen{display:none;min-height:100vh;padding:56px 18px 40px;flex-direction:column;align-items:center;justify-content:center;gap:14px;animation:in .5s}
+.screen.on{display:flex}
+@keyframes in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+h1{font-size:2rem;margin:0;color:var(--gold)}h2{margin:0;color:var(--gold)}p{margin:0;max-width:420px;line-height:1.5}
+button{font:inherit;font-weight:700;border:0;border-radius:14px;padding:12px 22px;background:var(--gold);color:#2a1200;cursor:pointer}
+button.alt{background:var(--card);color:var(--fg);border:1px solid #6b2a3a}
+button:active{transform:scale(.95)}
+input{font:inherit;padding:12px;border-radius:12px;border:1px solid #6b2a3a;background:var(--card);color:var(--fg);text-align:center}
+#diya{font-size:110px;cursor:pointer;filter:grayscale(1) brightness(.4);transition:.6s}
+body.lit #diya{filter:none;animation:glow 1.6s infinite alternate}
+@keyframes glow{to{text-shadow:0 0 40px #ffb703;transform:scale(1.08)}}
+.arena{position:relative;width:100%;max-width:420px;height:300px;background:var(--card);border-radius:18px;overflow:hidden;border:1px solid #6b2a3a}
+.arena button.t{position:absolute;font-size:34px;padding:2px 6px;background:none;border-radius:50%}
+.opts{display:flex;flex-direction:column;gap:10px;width:100%;max-width:380px}
+.bar{width:100%;max-width:380px;height:22px;background:var(--card);border-radius:12px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--gold))}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;width:min(88vw,340px)}
+.grid b{aspect-ratio:1;border-radius:50%;background:#3a1a24;cursor:pointer;border:1px solid #6b2a3a}
+.sw{width:38px;height:38px;border-radius:50%;padding:0;border:3px solid transparent;font-size:18px}
+.sw.sel{border-color:#fff;transform:scale(1.15)}
+#cp{width:44px;height:38px;border:0;background:none;padding:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center}
+.screen{min-height:100dvh;position:relative;z-index:1}
+#bg{position:fixed;inset:0;pointer-events:none;z-index:0}
+body{overscroll-behavior-y:none}
+button,.arena,.grid,#diya{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.arena button.t{font-size:40px;padding:6px 10px}
+@media(max-width:400px){h1{font-size:1.6rem}.arena{height:260px}}
+.fwd{background:#103a2c;border-radius:14px;padding:12px 14px;max-width:380px;text-align:left;font-size:.95rem}
+.fwd small{color:#8fd3b6}
+#dots{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:5}
+#dots i{width:9px;height:9px;border-radius:50%;background:#4a2a33}#dots i.d{background:var(--gold)}
+#snd{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));right:10px;z-index:6;padding:4px 10px;background:var(--card);color:var(--fg)}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:9}
+#egg{cursor:pointer;opacity:.7;font-size:1.4rem;margin-top:18px}
+</style></head><body>
+<canvas id="bg"></canvas><canvas id="fx"></canvas><div id="dots"></div><button id="snd">🔊</button>
+
+<section class="screen" id="s1"><p>Andhera hai... diya jalao 👇</p><div id="diya">🪔</div><p id="t1">(diya pe tap karo)</p></section>
+
+<section class="screen" id="s2"><h1 id="hi">Diwali Mubarak! 🪔</h1>
+<div id="nm"><p>Pehle naam batao:</p><input id="ni" placeholder="Tumhara naam"><br><br><button id="nb">Aage badho</button></div>
+<div id="w2" style="display:none"><p>Is Diwali pe maine tumhare liye ek chhota sa surprise banaya hai, dekhna to banta hai. 😏</p><p>Chalo, 9 level hain aage. Kaun jeetta hai dekhte hain!</p><button class="nx">Shuru karo ➜</button></div></section>
+
+<section class="screen" id="s3"><h2>Level 3: Mithai 🍬</h2><p>Mithai khaoge?</p>
+<div class="arena" id="ar3"><button id="yes" style="position:absolute;left:20px;top:20px">Haan, do mithai</button><button class="alt" id="no" style="position:absolute;left:200px;top:120px">Nahi chahiye</button></div>
+<p id="m3"></p></section>
+
+<section class="screen" id="s4"><h2>Level 4: Tum kaunsa pataka ho?</h2><p id="qq"></p><div class="opts" id="qo"></div><p id="qr"></p></section>
+
+<section class="screen" id="s5"><h2>Level 5: Pataka phodo 💥</h2><p>15 second. Score: <b id="sc">0</b> | Time: <b id="tm">15</b></p><div class="arena" id="ar5"></div><button id="st5">Start</button><p id="r5"></p></section>
+
+<section class="screen" id="s6"><h2>Level 6: Ghar ki safai 🧹</h2><p>Mummy 12 second me aa rahi hai! Saara kachra uthao. Bacha: <b id="kc">8</b> | Time: <b id="kt">12</b></p><div class="arena" id="ar6"></div><button id="st6">Start</button><p id="r6"></p></section>
+
+<section class="screen" id="s7"><h2>Level 7: Rangoli 🎨</h2><p>Rang chuno, phir dots pe tap ya ungli ghumao. Mirror ON hai to chaaron taraf ban jayegi!</p><div class="row" id="pal"></div><div class="row"><span>Apna rang:</span><input type="color" id="cp" value="#ff2bd6"></div><div class="grid" id="gr"></div><div class="row"><button class="alt" id="mr">Mirror: ON</button><button class="alt" id="rd">🎲 Random</button><button class="alt" id="cl">🧹 Saaf</button><button class="alt" id="ph">📸 Photo save/share</button><button class="alt" id="rt">⭐ Rate karo</button></div><p id="rm"></p><button class="nx">Rangoli ban gayi ➜</button></section>
+
+<section class="screen" id="s8"><h2>Level 8: Shayari + Forward 📱</h2><div class="fwd" id="sh">Button dabao, shayari aayegi 👇</div><button id="shb">Naya shayari 🎤</button>
+<div class="fwd"><small>Forwarded many times</small><br>Ye message 11 logon ko bhejo warna Lakshmi ji naraz ho jayengi aur tumhara bonus 2027 tak ruk jayega 😂</div><button class="nx">Maine bhej diya (jhooth) ➜</button></section>
+
+<section class="screen" id="s9"><h2>Level 9: Diwali Bonus 💰</h2><p id="bt">Bonus process ho raha hai...</p><div class="bar"><i id="bf"></i></div><p id="bp">0%</p>
+<div id="fin" style="display:none"><h1 id="fh"></h1><p id="fm"></p><div class="fwd" id="fsh" style="text-align:center;font-size:1.05rem;line-height:1.7;margin:14px auto;border:1px solid #ffb703;background:#2a0f18"></div><br><button id="wa">WhatsApp pe bhejo 📲</button> <button class="alt" id="rp">Fir se khelo</button><div id="egg">🪔</div><p id="eg"></p></div></section>
+
+<div id="ov" style="display:none;position:fixed;inset:0;z-index:20;background:#000d;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px"><p>Photo pe ungli dabake rakho (long-press), phir &ldquo;Save / Add to Photos&rdquo; chuno 📲</p><img id="oi" style="max-width:100%;max-height:65vh;border-radius:12px" alt="rangoli"><button id="oc">Band karo</button></div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+let name="",cur=0,snd=true,AC;
+try{name=decodeURIComponent(location.hash.slice(1)).slice(0,30)}catch(e){}
+// === Yahan apna personal message likho ===
+const MSG="Is Diwali pe bas itna kehna tha: tum un kuch logon me ho jinse baat karke din achha ho jaata hai. Tumhari hansi, tumhari madad aur tumhari dosti ke liye shukriya. Tumhari zindagi me diye jaisi roshni ho, mithai jaisi mithaas ho aur har sapna poora ho. Happy Diwali!";
+const MSG1="Dost, tere jaisa yaar milna kismat ki baat hai. Is Diwali tere ghar me khushiyon ke diye jalein, sehat ka anaar phoote, paison ki phuljhadi chale aur har pareshani sutli bom ki tarah door jaakar phat jaye. Tu jahan bhi hai, tera yaar tere saath hai. Happy Diwali 🪔";
+const FS="Diye ki roshni se jagmag ho tumhara har sapna,\nMithaas se bhara rahe har rishta, har apna.\nKhushiyan barse aise, jaise phuljhadi ki chamak,\nDiwali mubarak dost, hansti rehna, yunhi mehek!";
+const FS1="Roshan ho tera har raasta, diye ki jagmag roshni se,\nMithaas bhari ho zindagi, mithai ki har kashish se.\nDukh ke andhere door hon, khushiyon ka ho basera,\nDiwali mubarak dost, tu hi to hai ghar ka savera! 🎆";
+const MSG0="Tu mera sabse kamaal dost hai. Is Diwali teri jeb mithai se, dil khushi se aur WhatsApp wishes se bhara rahe. Udhaar wapas karna mat bhoolna 😂";
+const dots=$("#dots");for(let i=1;i<=9;i++)dots.innerHTML+="<i></i>";
+function go(n){cur=n;$$(".screen").forEach(s=>s.classList.remove("on"));$("#s"+n).classList.add("on");$$("#dots i").forEach((d,i)=>d.classList.toggle("d",i<n));window.scrollTo(0,0)}
+function beep(f=300,d=.12,type="square"){if(!snd)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(.15,AC.currentTime);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+d);o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}}
+function boom(){beep(90,.3,"sawtooth");beep(60,.4,"triangle")}
+$("#snd").onclick=()=>{snd=!snd;$("#snd").textContent=snd?"🔊":"🔇"};
+// fireworks
+const cv=$("#fx"),cx=cv.getContext("2d");let P=[];
+function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener("resize",rs);
+function burst(x,y,n=40){const c=["#ffb703","#e63946","#fb8500","#8ecae6","#ffd6a5","#b5179e"];for(let i=0;i<n;i++){const a=Math.random()*6.28,v=2+Math.random()*5;P.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,l:60,c:c[i%6]})}}
+(function loop(){cx.clearRect(0,0,cv.width,cv.height);P=P.filter(p=>p.l>0);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.08;p.l--;cx.globalAlpha=p.l/60;cx.fillStyle=p.c;cx.fillRect(p.x,p.y,3,3)});requestAnimationFrame(loop)})();
+$$(".nx").forEach(b=>b.onclick=()=>go(cur+1));
+const rnd=(a,b)=>a+Math.random()*(b-a);
+// background fireworks
+const bg=$("#bg"),bx=bg.getContext("2d");let BP=[],RK=[];
+function rb(){bg.width=innerWidth;bg.height=innerHeight}rb();addEventListener("resize",rb);
+function launch(){RK.push({x:rnd(40,innerWidth-40),y:innerHeight,vy:-rnd(7,10),ty:rnd(innerHeight*.12,innerHeight*.45)})}
+function bburst(x,y){const c=["#ffb703","#e63946","#fb8500","#8ecae6","#ffd6a5","#b5179e","#06d6a0"],k=c[Math.floor(Math.random()*7)];for(let i=0;i<36;i++){const a=i/36*6.283,v=1.5+Math.random()*3.5;BP.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,l:70,c:k})}}
+(function bl(){bx.clearRect(0,0,bg.width,bg.height);RK=RK.filter(r=>{r.y+=r.vy;bx.globalAlpha=.9;bx.fillStyle="#ffd6a5";bx.fillRect(r.x,r.y,2,9);if(r.y<=r.ty){bburst(r.x,r.y);return false}return true});BP=BP.filter(p=>p.l>0);BP.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.05;p.vx*=.985;p.l--;bx.globalAlpha=p.l/70*.8;bx.fillStyle=p.c;bx.fillRect(p.x,p.y,3,3)});requestAnimationFrame(bl)})();
+setInterval(()=>{if(!document.hidden&&document.body.classList.contains("lit"))launch()},1000);
+// 1
+$("#diya").onclick=()=>{document.body.classList.add("lit");beep(600,.2,"sine");burst(innerWidth/2,innerHeight/2,60);$("#t1").textContent="Waah! Roshni ho gayi ✨";setTimeout(()=>{name?start2():go(2)},1400)};
+function start2(){go(2);$("#hi").textContent=(name?name+", ":"")+"Diwali Mubarak! 🪔";$("#nm").style.display="none";$("#w2").style.display="block"}
+$("#nb").onclick=()=>{name=$("#ni").value.trim().slice(0,30)||"Dost";start2()};
+// 3
+let tries=0;const msgs=["Arre pakad ke dikhao 😏","Itni jaldi nahi!","Mithai to tumhe bhi pasand hai, maan jao 😂","Button bhi tumse tez nikla!"];
+function run(e){e.preventDefault();tries++;const a=$("#ar3"),b=$("#no");b.style.left=rnd(0,a.clientWidth-b.offsetWidth)+"px";b.style.top=rnd(0,a.clientHeight-b.offsetHeight)+"px";beep(200+tries*40,.08);$("#m3").textContent=tries>6?"Thak gayi? Chalo ab Haan dabao 😂":msgs[tries%4]}
+$("#no").addEventListener("pointerenter",run);$("#no").addEventListener("pointerdown",run);$("#no").addEventListener("click",run);
+$("#yes").onclick=()=>{$("#m3").textContent="Shabaash! Ye hui na baat 🍬";burst(innerWidth/2,200);beep(700,.2,"sine");setTimeout(()=>go(4),1200)};
+// 4
+const Q=[["Diwali pe subah uthte ho?",["Mummy ke dhamkane pe","Pataka sunke","Mithai ki khushboo se"]],["Ghar ki safai me tumhara role?",["Jab mummy dekhe tab kaam","Dekhne wala supervisor","Chup chaap kar deti hoon"]],["Rishtedaar aaye to?",["Chhup jaati hoon","Sabka dil jeet leti hoon","Sirf mithai dhoondti hoon"]],["Diwali bonus milne pe?",["Turant kharch","Sabko party","Bachaungi (jhooth)"]]];
+const R=[["Sutli Bomb 💣","Dhamaakedaar entry, sabki favourite. Tumhare bina Diwali adhoori hai!"],["Anar 🎆","Tum jahan jaati ho wahan roshni phail jaati hai. Bas dhyaan rakhna, itni chamak se sabki aankhein chaundhiya jayengi!"],["Phuljhadi ✨","Chhoti si, par sabki pasandida. Roshni phailane wali!"]];
+let qi=0,qs=[0,0,0];
+function showQ(){$("#qq").textContent=Q[qi][0];$("#qo").innerHTML="";Q[qi][1].forEach((t,i)=>{const b=document.createElement("button");b.className="alt";b.textContent=t;b.onclick=()=>{qs[i]++;beep(400+i*100,.1);qi++;qi<Q.length?showQ():res()};$("#qo").append(b)})}
+function res(){const m=qs.indexOf(Math.max(...qs));$("#qq").textContent="";$("#qo").innerHTML="";$("#qr").innerHTML="<h1>"+(name||"Tum")+" = "+R[m][0]+"</h1><p>"+R[m][1]+"</p><br><button id='n4'>Aage ➜</button>";burst(innerWidth/2,250);boom();$("#n4").onclick=()=>go(5)}
+showQ();
+// 5
+function game(arenaId,emoji,secs,onTap,onEnd,cnt){const a=$(arenaId);let t=secs,iv,sp;a.innerHTML="";
+const spawn=()=>{const b=document.createElement("button");b.className="t";b.textContent=emoji;b.style.left=rnd(0,a.clientWidth-44)+"px";b.style.top=rnd(0,a.clientHeight-44)+"px";b.onpointerdown=e=>{e.preventDefault();const r=b.getBoundingClientRect();burst(r.left+20,r.top+20,25);boom();b.remove();onTap()};a.append(b)};
+return{spawn,stop:()=>{clearInterval(iv);clearInterval(sp)},run:(tick,end,rate)=>{iv=setInterval(()=>{t--;tick(t);if(t<=0){clearInterval(iv);clearInterval(sp);end()}},1000);if(rate)sp=setInterval(spawn,rate)}}}
+let s5=0;$("#st5").onclick=()=>{s5=0;$("#sc").textContent=0;$("#st5").style.display="none";$("#r5").textContent="";const g=game("#ar5","💥",15,()=>{s5++;$("#sc").textContent=s5});g.run(t=>$("#tm").textContent=t,()=>{$("#ar5").innerHTML="";$("#r5").innerHTML=(s5>=15?"Dhamaka! Tum to Diwali ki Queen ho 🔥":s5>=8?"Achha khela, thoda aur practice karo 😏":"Arre, is baar pataka jeet gaya, agli baar tumhari baari 😂")+"<br><br><button id='n5'>Aage ➜</button>";$("#n5").onclick=()=>go(6)},500)};
+// 6
+$("#st6").onclick=()=>{let k=8;$("#kc").textContent=k;$("#st6").style.display="none";const a=$("#ar6");a.innerHTML="";const g=game("#ar6","🗑️",12,()=>{k--;$("#kc").textContent=k;if(k<=0){g.stop();fin6(true)}});for(let i=0;i<8;i++)g.spawn();g.run(t=>$("#kt").textContent=t,()=>fin6(false));
+function fin6(w){$("#r6").innerHTML=(w?"Ghar chamak gaya! Mummy khush 😇":"Mummy aa gayi 😱 Ab thodi pyaari si daant sunne ko tayyar raho!")+"<br><br><button id='n6'>Aage ➜</button>";if(w)burst(innerWidth/2,300,60);$("#n6").onclick=()=>go(7)}};
+// 7
+const PC=["#e63946","#ffb703","#fb8500","#06d6a0","#8ecae6","#b5179e","#ffffff","#3a1a24"],N=9,gr=$("#gr"),cells=[];let sel=PC[0],mir=true,dn=false;
+gr.style.gridTemplateColumns="repeat("+N+",1fr)";gr.style.touchAction="none";
+PC.forEach((c,i)=>{const b=document.createElement("button");b.className="sw"+(i==0?" sel":"");b.style.background=c;b.textContent=i==7?"🧽":"";b.onclick=()=>{sel=c;$$(".sw").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");beep(500,.06,"sine")};$("#pal").append(b)});
+$("#cp").oninput=e=>{sel=e.target.value;$$(".sw").forEach(x=>x.classList.remove("sel"))};
+function paint(i){const r=Math.floor(i/N),c=i%N;(mir?[[r,c],[r,N-1-c],[N-1-r,c],[N-1-r,N-1-c]]:[[r,c]]).forEach(([y,x])=>cells[y*N+x].style.background=sel);beep(300+(i%7)*60,.05,"sine")}
+gr.onpointerdown=e=>{dn=true;const t=e.target.dataset.i;if(t!=null)paint(+t)};
+gr.onpointermove=e=>{if(!dn)return;const t=document.elementFromPoint(e.clientX,e.clientY);if(t&&t.dataset&&t.dataset.i!=null)paint(+t.dataset.i)};
+addEventListener("pointerup",()=>dn=false);
+$("#mr").onclick=()=>{mir=!mir;$("#mr").textContent="Mirror: "+(mir?"ON":"OFF")};
+$("#cl").onclick=()=>{cells.forEach(b=>b.style.background="");$("#rm").textContent=""};
+$("#rd").onclick=()=>{const s=sel;cells.forEach(b=>b.style.background="");for(let i=0;i<N*N;i++)if(Math.random()<.5){sel=PC[Math.floor(Math.random()*7)];paint(i)}sel=s};
+$("#rt").onclick=()=>{const k=cells.filter(b=>b.style.background&&b.style.background!=="rgb(58, 26, 36)").length;$("#rm").textContent=k<10?"Abhi to shuruaat hai, thode aur rang bharo 😂":k<40?"Achhi hai, mummy bolegi: waah beta! 😅":"Wah! Mummy ne photo kheench li, status pe laga di 📸";if(k>=40){burst(innerWidth/2,300,60);boom()}};
+for(let i=0;i<N*N;i++){const b=document.createElement("b");b.dataset.i=i;cells.push(b);gr.append(b)}
+function shot(){const W=720,H=860,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d"),g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,"#5a1a0a");g.addColorStop(1,"#12060a");x.fillStyle=g;x.fillRect(0,0,W,H);x.textAlign="center";x.fillStyle="#ffb703";x.font="bold 44px sans-serif";x.fillText("🪔 Happy Diwali"+(name?" "+name:"")+"! 🪔",W/2,80);const s=64,o=(W-N*s)/2;cells.forEach((b,i)=>{x.beginPath();x.arc(o+(i%N)*s+s/2,140+Math.floor(i/N)*s+s/2,s/2-5,0,6.283);x.fillStyle=getComputedStyle(b).backgroundColor;x.fill()});x.fillStyle="#fff4dc";x.font="28px sans-serif";x.fillText("Meri banayi hui rangoli",W/2,H-60);return new Promise(r=>c.toBlob(r,"image/png"))}
+$("#ph").onclick=async()=>{try{const dl=window.claude&&await claude.use("downloads");if(!dl){$("#rm").textContent="Yahan photo save nahi ho sakti 😕 screenshot le lo!";return}const blob=await shot();await dl.save({filename:"meri-rangoli.png",data:blob});$("#rm").textContent="Photo ready! Ab WhatsApp pe bhej do 📲"}catch(e){if(!e||e.code!=="declined")$("#rm").textContent="Photo save nahi hui 😕 screenshot le lo!"}};
+// 8
+const SH=["Diwali aayi, diye jale, tum bhi jalo mere saath, ghar ka kachra tum uthao, mithai hum khayein haath.","Pataka phoota, dil bhi toota, bonus ka jab mail na aaya. Phir bhi hasna, Diwali manana, EMI ne bhi diya jalaya.","Tum phuljhadi, hum anar, tum mithai, hum udhaar. Diwali pe milte rahenge, yaaron ka yahi hai pyaar.","Lakshmi ji ko bola aana, wo bole WiFi nahi hai. Bonus ka network jab aayega, tab milenge, abhi nahi hai.","Safai karte karte kamar toot gayi, par selfie ki baari aayi to muskaan chhoot gayi. Diwali mubarak!"];
+$("#shb").onclick=()=>{$("#sh").textContent=SH[Math.floor(Math.random()*SH.length)];beep(500,.1,"sine")};
+addEventListener("pointerdown",()=>{try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume()}catch(e){}},{once:true});
+$("#ph").onclick=async()=>{const blob=await shot();if(!blob)return;const f=new File([blob],"meri-rangoli.png",{type:"image/png"});
+try{const dl=window.claude&&await claude.use("downloads");if(dl){await dl.save({filename:"meri-rangoli.png",data:blob});$("#rm").textContent="Photo ready! WhatsApp pe bhej do 📲";return}}catch(e){if(e&&e.code==="declined")return}
+try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:"Meri Diwali rangoli 🪔"});return}}catch(e){if(e&&e.name==="AbortError")return}
+$("#oi").src=URL.createObjectURL(blob);$("#ov").style.display="flex"};
+$("#oc").onclick=()=>$("#ov").style.display="none";
+const SHARE_URL="https://claude.ai/artifact/1jDsjiWLM6Hz9duGfVUJTF";
+$("#wa").onclick=async()=>{const t="Happy Diwali! 🪔 Ye funny Diwali game khelo: "+SHARE_URL;try{if(navigator.share){await navigator.share({text:t});return}}catch(e){if(e&&e.name==="AbortError")return}const w="https://wa.me/?text="+encodeURIComponent(t);if(!window.open(w,"_blank"))location.href=w};
+// 9
+let pr=0,iv9;$("#s9").addEventListener("x",()=>{});
+const obs=new MutationObserver(()=>{if($("#s9").classList.contains("on")&&!iv9){pr=0;iv9=setInterval(()=>{pr+=pr<80?2:pr<98?1:.1;if(pr>=99){pr=99;clearInterval(iv9);$("#bt").textContent="Bonus abhi process mein hai, agle saal tak wait karein 😂";setTimeout(final,2500)}$("#bf").style.width=pr+"%";$("#bp").textContent=Math.floor(pr)+"%"},90)}});obs.observe($("#s9"),{attributes:true});
+function final(){$("#fin").style.display="block";$("#fh").textContent="Happy Diwali "+(name||"Dost")+"! 🎆";$("#fm").textContent=MSG;$("#fsh").innerHTML=FS.replace(/\n/g,"<br>");for(let i=0;i<5;i++)setTimeout(launch,i*250);let n=0;const t=setInterval(()=>{burst(rnd(60,innerWidth-60),rnd(80,innerHeight/2),50);boom();if(++n>8)clearInterval(t)},500)}
+$("#wa").onclick=()=>{const u=location.href.split("#")[0];window.open("https://wa.me/?text="+encodeURIComponent("Happy Diwali! 🪔 Ye funny Diwali game khelo: "+u),"_blank")};
+$("#rp").onclick=()=>location.reload();
+let eg=0;$("#egg").onclick=()=>{eg++;beep(300+eg*60,.08,"sine");if(eg>=5){$("#eg").textContent="🎁 Secret: tumhe 1 kg kaju katli milegi! (Condition: ek piece mujhe bhi)";burst(innerWidth/2,innerHeight/2,80);eg=0}};
+go(1);
+</script></body></html>
